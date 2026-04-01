@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongodb-dev
+    restart: unless-stopped
+    ports:
+      # Exposes the standard MongoDB port to your host machine (localhost)
+      - "27017:27017" 
+    environment:
+      # Credentials for the root user, matching your Spring Boot URI:
+      # mongodb://mongo_root:mongo_password@localhost:27017/...
+      MONGO_INITDB_ROOT_USERNAME: mongo_root
+      MONGO_INITDB_ROOT_PASSWORD: mongo_password
+    volumes:
+      # Persistent storage for your development data
+      - mongo_data_dev:/data/db
+
+volumes:
+  mongo_data_dev:
